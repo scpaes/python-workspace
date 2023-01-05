@@ -3,20 +3,18 @@ from .conta_bancaria import ContaBancaria
 
 
 class OperacaoBancaria(ABC):
-    @abstractmethod
-    def sacar(cls, valor_do_saque: float, conta_bancaria: ContaBancaria) -> tuple[bool, float]:
+    @classmethod
+    def sacar(cls, valor_do_saque: float, numero_conta_bancaria: str) -> tuple[bool, float]:
+        conta_bancaria = [
+            conta for numero, conta in ContaBancaria.contas_abertas if numero == numero_conta_bancaria][0]
         if conta_bancaria.saldo < valor_do_saque:
             return False, conta_bancaria.saldo
-        conta_bancaria.saldo = conta_bancaria - valor_do_saque
+        conta_bancaria.modificar_saldo("-", valor_do_saque)
         return True, conta_bancaria.saldo
 
     @abstractmethod
     def depositar(cls, valor_do_deposito: float, conta_bancaria: ContaBancaria) -> tuple[bool, float]:
         return conta_bancaria.modificar_saldo('+', valor_do_deposito)
-
-    @abstractmethod
-    def sacar(cls, valor_do_saque: float, conta_bancaria: ContaBancaria) -> tuple[bool, float]:
-        return conta_bancaria.modificar_saldo('-', valor_do_saque)
 
     @abstractmethod
     def transferir(cls, valor_transferencia: float, conta_origem: ContaBancaria, conta_destino: ContaBancaria) -> bool:

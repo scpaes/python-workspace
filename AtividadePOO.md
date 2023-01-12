@@ -3,7 +3,7 @@ PIBEM-BANK SYSTEM
 Vamos desenvolver um sistema de banco para os membros da igreja pibem, nesse sistema será necessário realizar o cadastro de contas para os membros da igreja, realizarem transações.
 
 ##  Criação de contas:
-Para o desenvolvimento da funcionalidade de criação de contas será necessário realizar os seguintes passos. 
+Para o desenvolvimento da funcionalidade de criação de contas será necessário realizar os seguintes passos.
 - Criar uma classe abstrata chamada ContaBancaria.
 - Criar classes para os tipos de conta [corrente, salário, poupança], que devem herdar da classe "mãe" ContaBancaria.
 - Criar um método(comportamento) para a abertura e para o fechamento de uma conta.

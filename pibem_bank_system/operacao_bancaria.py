@@ -13,8 +13,12 @@ class OperacaoBancaria(ABC):
         return True, conta_bancaria.saldo
 
     @classmethod
-    def depositar(cls, valor_do_deposito: float, conta_bancaria: ContaBancaria) -> tuple[bool, float]:
-        return conta_bancaria.modificar_saldo('+', valor_do_deposito)
+    def depositar(cls, valor_do_deposito: float, numero_conta_bancaria: str) -> tuple[bool, float]:
+        conta_bancaria = [
+            conta for numero, conta in ContaBancaria.contas_abertas if numero == numero_conta_bancaria
+        ][0]
+        conta_bancaria.modificar_saldo('+', valor_do_deposito)
+        return True, conta_bancaria.saldo
 
     @classmethod
     def transferir(cls, valor_transferencia: float, conta_origem: ContaBancaria, conta_destino: ContaBancaria) -> bool:

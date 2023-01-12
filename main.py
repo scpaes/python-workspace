@@ -4,7 +4,7 @@ from pibem_bank_system.operacao_bancaria import OperacaoBancaria
 
 if __name__ == "__main__":
     while True:
-        print("Selecione a operação \n 1) abrir conta \n 2) Realizar transação")
+        print("Selecione a operação \n 1) abrir conta \n 2) Realizar transação ATUALIZADO!!")
         operacao_selecionada = input("")
 
         match operacao_selecionada:
@@ -19,21 +19,14 @@ if __name__ == "__main__":
                 match tipo_de_conta:
                     case "1":
                         nova_conta = ContaCorrente.abrir_conta(nome_completo, idade, float(saldo))
-                        isinstance(nova_conta, ContaBancaria)
                     case "2":
                         nova_conta = ContaPoupanca.abrir_conta(nome_completo, idade, float(saldo))
-                        isinstance(nova_conta, ContaBancaria)
                     case "3":
                         nova_conta = ContaSalario.abrir_conta(nome_completo, idade, float(saldo))
-                        isinstance(nova_conta, ContaBancaria)
-                print(isinstance(nova_conta.saldo, float))
-                print(isinstance(nova_conta.cliente, Cliente))
-                print(nova_conta)
-                print(nova_conta.status)
-                print(nova_conta.status)
 
+                print(f"Número da conta: {nova_conta.id} saldo: {nova_conta.saldo}")
             case "2":
-                print("Informe o tipo da transação: \n 1) Saque")
+                print("Informe o tipo da transação: \n 1) Saque \n 2) Depósito")
                 tipo_de_transacao = input()
 
                 match tipo_de_transacao:
@@ -42,4 +35,11 @@ if __name__ == "__main__":
                         dados_para_realizar_o_saque = input().split(",")
                         valor, numero_conta_bancaria = [item.strip() for item in dados_para_realizar_o_saque]
                         resultado, saldo = OperacaoBancaria.sacar(float(valor), numero_conta_bancaria)
+                        print(f"Resultado do saque: {resultado} saldo atualizado: {saldo}")
+
+                    case "2":
+                        print("Informe o valor, número da conta")
+                        dados_para_realizar_o_deposito = input().split(",")
+                        valor, numero_conta_bancaria = [item.strip() for item in dados_para_realizar_o_deposito]
+                        resultado, saldo = OperacaoBancaria.depositar(float(valor), numero_conta_bancaria)
                         print(f"Resultado do saque: {resultado} saldo atualizado: {saldo}")

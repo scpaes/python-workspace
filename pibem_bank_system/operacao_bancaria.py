@@ -12,11 +12,11 @@ class OperacaoBancaria(ABC):
         conta_bancaria.modificar_saldo("-", valor_do_saque)
         return True, conta_bancaria.saldo
 
-    @abstractmethod
+    @classmethod
     def depositar(cls, valor_do_deposito: float, conta_bancaria: ContaBancaria) -> tuple[bool, float]:
         return conta_bancaria.modificar_saldo('+', valor_do_deposito)
 
-    @abstractmethod
+    @classmethod
     def transferir(cls, valor_transferencia: float, conta_origem: ContaBancaria, conta_destino: ContaBancaria) -> bool:
         # remover o saldo da conta de origem
         sucesso, _ = conta_origem.modificar_saldo('-', valor_transferencia)
